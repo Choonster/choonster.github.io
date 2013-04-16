@@ -64,10 +64,12 @@
 
 <h1>Module <code>Main</code></h1>
 
-<p>Create new copies of the library.</p>
-<p>
+<p>Creates new copies of the library.</p>
+<p> This documentation only covers the arguments and return types of the library's methods. See the <a href="http://blizzard.github.io/api-wow-docs/">API documentation</a> for full explanation of the returned data and query fields.</p>
 
-</p>
+<p> All methods that send a request to the API decode the JSON into the equivalent Lua table structures and then return a read-only proxy to the decoded data.
+ This proxy is a regular table with its __index, __pairs and __ipairs metamethods pointing to the original data.
+ Access to nested tables also returns a proxy rather than the raw table.</p>
 
 
 <h2><a href="#Functions">Functions</a></h2>

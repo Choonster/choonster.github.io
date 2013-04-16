@@ -64,7 +64,7 @@
 
 <h1>Module <code>data</code></h1>
 
-<p>Implements the Data section of the API</p>
+<p>Implements the Data Resources section of the API</p>
 <p>
 
 </p>
@@ -73,43 +73,43 @@
 <h2><a href="#Functions">Functions</a></h2>
 <table class="function_list">
 	<tr>
-	<td class="name" nowrap><a href="#wow:GetBattlegroups">wow:GetBattlegroups&nbsp;(forceRefresh)</a></td>
+	<td class="name" nowrap><a href="#wow:GetBattlegroups">wow:GetBattlegroups&nbsp;( [forceRefresh])</a></td>
 	<td class="summary">Retrieve a list of Battlegroups.</td>
 	</tr>
 	<tr>
-	<td class="name" nowrap><a href="#wow:GetCharacterRaces">wow:GetCharacterRaces&nbsp;(locale, forceRefresh)</a></td>
+	<td class="name" nowrap><a href="#wow:GetCharacterRaces">wow:GetCharacterRaces&nbsp;( [locale [, forceRefresh]])</a></td>
 	<td class="summary">Retrieve a list of character races.</td>
 	</tr>
 	<tr>
-	<td class="name" nowrap><a href="#wow:GetCharacterClasses">wow:GetCharacterClasses&nbsp;(locale, forceRefresh)</a></td>
+	<td class="name" nowrap><a href="#wow:GetCharacterClasses">wow:GetCharacterClasses&nbsp;( [locale [, forceRefresh]])</a></td>
 	<td class="summary">Retrieve a list of character classes.</td>
 	</tr>
 	<tr>
-	<td class="name" nowrap><a href="#wow:GetCharacterAchievements">wow:GetCharacterAchievements&nbsp;(locale, forceRefresh)</a></td>
+	<td class="name" nowrap><a href="#wow:GetCharacterAchievements">wow:GetCharacterAchievements&nbsp;( [locale [, forceRefresh]])</a></td>
 	<td class="summary">Retrieve a list of character achievements.</td>
 	</tr>
 	<tr>
-	<td class="name" nowrap><a href="#wow:GetGuildRewards">wow:GetGuildRewards&nbsp;(locale, forceRefresh)</a></td>
+	<td class="name" nowrap><a href="#wow:GetGuildRewards">wow:GetGuildRewards&nbsp;( [locale [, forceRefresh]])</a></td>
 	<td class="summary">Retrieve a list of guild rewards.</td>
 	</tr>
 	<tr>
-	<td class="name" nowrap><a href="#wow:GetGuildPerks">wow:GetGuildPerks&nbsp;(locale, forceRefresh)</a></td>
+	<td class="name" nowrap><a href="#wow:GetGuildPerks">wow:GetGuildPerks&nbsp;( [locale [, forceRefresh]])</a></td>
 	<td class="summary">Retrieve a list of guild perks.</td>
 	</tr>
 	<tr>
-	<td class="name" nowrap><a href="#wow:GetGuildAchievements">wow:GetGuildAchievements&nbsp;(locale, forceRefresh)</a></td>
+	<td class="name" nowrap><a href="#wow:GetGuildAchievements">wow:GetGuildAchievements&nbsp;( [locale [, forceRefresh]])</a></td>
 	<td class="summary">Retrieve a list of guild achievements.</td>
 	</tr>
 	<tr>
-	<td class="name" nowrap><a href="#wow:GetItemClasses">wow:GetItemClasses&nbsp;(locale, forceRefresh)</a></td>
+	<td class="name" nowrap><a href="#wow:GetItemClasses">wow:GetItemClasses&nbsp;( [locale [, forceRefresh]])</a></td>
 	<td class="summary">Retrieve a list of item classes.</td>
 	</tr>
 	<tr>
-	<td class="name" nowrap><a href="#wow:GetTalents">wow:GetTalents&nbsp;(locale, forceRefresh)</a></td>
+	<td class="name" nowrap><a href="#wow:GetTalents">wow:GetTalents&nbsp;( [locale [, forceRefresh]])</a></td>
 	<td class="summary">Retrieve a list of talents, specs and glyphs for each class.</td>
 	</tr>
 	<tr>
-	<td class="name" nowrap><a href="#wow:GetBattlePetTypes">wow:GetBattlePetTypes&nbsp;(locale, forceRefresh)</a></td>
+	<td class="name" nowrap><a href="#wow:GetBattlePetTypes">wow:GetBattlePetTypes&nbsp;( [locale [, forceRefresh]])</a></td>
 	<td class="summary">Retrieve a list of battle pet types (including what they are strong and weak against).</td>
 	</tr>
 </table>
@@ -122,18 +122,42 @@
     <dl class="function">
     <dt>
     <a name = "wow:GetBattlegroups"></a>
-    <strong>wow:GetBattlegroups&nbsp;(forceRefresh)</strong>
+    <strong>wow:GetBattlegroups&nbsp;( [forceRefresh])</strong>
     </dt>
     <dd>
     Retrieve a list of Battlegroups.
- <br/> See :SendRequest for return values. See :SendRequest and :SendRequestRaw for more information on the forceRefresh parameter.
 
     <h3>Parameters:</h3>
     <ul>
         <li><span class="parameter">forceRefresh</span>
-         (boolean, optional) If true, send a request regardless of cached results.</li>
+            <span class="types"><span class="type">bool</span></span>
+         If true, send a request regardless of cached results.</li>
     </ul>
 
+    <h3>Returns:</h3>
+    <ol>
+        <li>
+          <span class="types"><span class="type">bool</span></span>
+        success: Did the query succeed?</li>
+        <li>
+          <span class="types"><span class="type">tab</span></span>
+        result: The decoded JSON data.</li>
+        <li>
+          <span class="types"><span class="type">number</span></span>
+        code: The HTTP response status code. If no request was sent, this will be 304.</li>
+        <li>
+          <span class="types"><a class="type" href="http://www.lua.org/manual/5.1/manual.html#5.4">string</a></span>
+        status: The full HTTP response status. If no request was sent, this will be "No request sent".</li>
+        <li>
+          <span class="types"><a class="type" href="http://www.lua.org/manual/5.1/manual.html#5.5">table</a></span>
+        headers: The HTTP headers of the response. If no request was sent, this will be nil.</li>
+        <li>
+          <span class="types"><span class="type">number</span></span>
+        time: The number of seconds between the function being called and the results being returned, calculated with os.time().</li>
+        <li>
+          <span class="types"><span class="type">number</span></span>
+        clock: The number of seconds of CPU time used between the function being called and the results being returned, calculated with os.clock().</li>
+    </ol>
 
 
 
@@ -141,20 +165,45 @@
 </dd>
     <dt>
     <a name = "wow:GetCharacterRaces"></a>
-    <strong>wow:GetCharacterRaces&nbsp;(locale, forceRefresh)</strong>
+    <strong>wow:GetCharacterRaces&nbsp;( [locale [, forceRefresh]])</strong>
     </dt>
     <dd>
     Retrieve a list of character races.
- <br/> See :SendRequest for return values. See :SendRequest and :SendRequestRaw for more information on the locale and forceRefresh parameters.
 
     <h3>Parameters:</h3>
     <ul>
         <li><span class="parameter">locale</span>
-         (string, optional) The locale to retrieve the data in.</li>
+            <span class="types"><a class="type" href="http://www.lua.org/manual/5.1/manual.html#5.4">string</a></span>
+         The locale to retrieve the data in.</li>
         <li><span class="parameter">forceRefresh</span>
-         (boolean, optional) If true, send a request regardless of cached results.</li>
+            <span class="types"><span class="type">bool</span></span>
+         If true, send a request regardless of cached results.</li>
     </ul>
 
+    <h3>Returns:</h3>
+    <ol>
+        <li>
+          <span class="types"><span class="type">bool</span></span>
+        success: Did the query succeed?</li>
+        <li>
+          <span class="types"><span class="type">tab</span></span>
+        result: The decoded JSON data.</li>
+        <li>
+          <span class="types"><span class="type">number</span></span>
+        code: The HTTP response status code. If no request was sent, this will be 304.</li>
+        <li>
+          <span class="types"><a class="type" href="http://www.lua.org/manual/5.1/manual.html#5.4">string</a></span>
+        status: The full HTTP response status. If no request was sent, this will be "No request sent".</li>
+        <li>
+          <span class="types"><a class="type" href="http://www.lua.org/manual/5.1/manual.html#5.5">table</a></span>
+        headers: The HTTP headers of the response. If no request was sent, this will be nil.</li>
+        <li>
+          <span class="types"><span class="type">number</span></span>
+        time: The number of seconds between the function being called and the results being returned, calculated with os.time().</li>
+        <li>
+          <span class="types"><span class="type">number</span></span>
+        clock: The number of seconds of CPU time used between the function being called and the results being returned, calculated with os.clock().</li>
+    </ol>
 
 
 
@@ -162,20 +211,45 @@
 </dd>
     <dt>
     <a name = "wow:GetCharacterClasses"></a>
-    <strong>wow:GetCharacterClasses&nbsp;(locale, forceRefresh)</strong>
+    <strong>wow:GetCharacterClasses&nbsp;( [locale [, forceRefresh]])</strong>
     </dt>
     <dd>
     Retrieve a list of character classes.
- <br/> See :SendRequest for return values. See :SendRequest and :SendRequestRaw for more information on the locale and forceRefresh parameters.
 
     <h3>Parameters:</h3>
     <ul>
         <li><span class="parameter">locale</span>
-         (string, optional) The locale to retrieve the data in.</li>
+            <span class="types"><a class="type" href="http://www.lua.org/manual/5.1/manual.html#5.4">string</a></span>
+         The locale to retrieve the data in.</li>
         <li><span class="parameter">forceRefresh</span>
-         (boolean, optional) If true, send a request regardless of cached results.</li>
+            <span class="types"><span class="type">bool</span></span>
+         If true, send a request regardless of cached results.</li>
     </ul>
 
+    <h3>Returns:</h3>
+    <ol>
+        <li>
+          <span class="types"><span class="type">bool</span></span>
+        success: Did the query succeed?</li>
+        <li>
+          <span class="types"><span class="type">tab</span></span>
+        result: The decoded JSON data.</li>
+        <li>
+          <span class="types"><span class="type">number</span></span>
+        code: The HTTP response status code. If no request was sent, this will be 304.</li>
+        <li>
+          <span class="types"><a class="type" href="http://www.lua.org/manual/5.1/manual.html#5.4">string</a></span>
+        status: The full HTTP response status. If no request was sent, this will be "No request sent".</li>
+        <li>
+          <span class="types"><a class="type" href="http://www.lua.org/manual/5.1/manual.html#5.5">table</a></span>
+        headers: The HTTP headers of the response. If no request was sent, this will be nil.</li>
+        <li>
+          <span class="types"><span class="type">number</span></span>
+        time: The number of seconds between the function being called and the results being returned, calculated with os.time().</li>
+        <li>
+          <span class="types"><span class="type">number</span></span>
+        clock: The number of seconds of CPU time used between the function being called and the results being returned, calculated with os.clock().</li>
+    </ol>
 
 
 
@@ -183,20 +257,45 @@
 </dd>
     <dt>
     <a name = "wow:GetCharacterAchievements"></a>
-    <strong>wow:GetCharacterAchievements&nbsp;(locale, forceRefresh)</strong>
+    <strong>wow:GetCharacterAchievements&nbsp;( [locale [, forceRefresh]])</strong>
     </dt>
     <dd>
     Retrieve a list of character achievements.
- <br/> See :SendRequest for return values. See :SendRequest and :SendRequestRaw for more information on the locale and forceRefresh parameters.
 
     <h3>Parameters:</h3>
     <ul>
         <li><span class="parameter">locale</span>
-         (string, optional) The locale to retrieve the data in.</li>
+            <span class="types"><a class="type" href="http://www.lua.org/manual/5.1/manual.html#5.4">string</a></span>
+         The locale to retrieve the data in.</li>
         <li><span class="parameter">forceRefresh</span>
-         (boolean, optional) If true, send a request regardless of cached results.</li>
+            <span class="types"><span class="type">bool</span></span>
+         If true, send a request regardless of cached results.</li>
     </ul>
 
+    <h3>Returns:</h3>
+    <ol>
+        <li>
+          <span class="types"><span class="type">bool</span></span>
+        success: Did the query succeed?</li>
+        <li>
+          <span class="types"><span class="type">tab</span></span>
+        result: The decoded JSON data.</li>
+        <li>
+          <span class="types"><span class="type">number</span></span>
+        code: The HTTP response status code. If no request was sent, this will be 304.</li>
+        <li>
+          <span class="types"><a class="type" href="http://www.lua.org/manual/5.1/manual.html#5.4">string</a></span>
+        status: The full HTTP response status. If no request was sent, this will be "No request sent".</li>
+        <li>
+          <span class="types"><a class="type" href="http://www.lua.org/manual/5.1/manual.html#5.5">table</a></span>
+        headers: The HTTP headers of the response. If no request was sent, this will be nil.</li>
+        <li>
+          <span class="types"><span class="type">number</span></span>
+        time: The number of seconds between the function being called and the results being returned, calculated with os.time().</li>
+        <li>
+          <span class="types"><span class="type">number</span></span>
+        clock: The number of seconds of CPU time used between the function being called and the results being returned, calculated with os.clock().</li>
+    </ol>
 
 
 
@@ -204,20 +303,45 @@
 </dd>
     <dt>
     <a name = "wow:GetGuildRewards"></a>
-    <strong>wow:GetGuildRewards&nbsp;(locale, forceRefresh)</strong>
+    <strong>wow:GetGuildRewards&nbsp;( [locale [, forceRefresh]])</strong>
     </dt>
     <dd>
     Retrieve a list of guild rewards.
- <br/> See :SendRequest for return values. See :SendRequest and :SendRequestRaw for more information on the locale and forceRefresh parameters.
 
     <h3>Parameters:</h3>
     <ul>
         <li><span class="parameter">locale</span>
-         (string, optional) The locale to retrieve the data in.</li>
+            <span class="types"><a class="type" href="http://www.lua.org/manual/5.1/manual.html#5.4">string</a></span>
+         The locale to retrieve the data in.</li>
         <li><span class="parameter">forceRefresh</span>
-         (boolean, optional) If true, send a request regardless of cached results.</li>
+            <span class="types"><span class="type">bool</span></span>
+         If true, send a request regardless of cached results.</li>
     </ul>
 
+    <h3>Returns:</h3>
+    <ol>
+        <li>
+          <span class="types"><span class="type">bool</span></span>
+        success: Did the query succeed?</li>
+        <li>
+          <span class="types"><span class="type">tab</span></span>
+        result: The decoded JSON data.</li>
+        <li>
+          <span class="types"><span class="type">number</span></span>
+        code: The HTTP response status code. If no request was sent, this will be 304.</li>
+        <li>
+          <span class="types"><a class="type" href="http://www.lua.org/manual/5.1/manual.html#5.4">string</a></span>
+        status: The full HTTP response status. If no request was sent, this will be "No request sent".</li>
+        <li>
+          <span class="types"><a class="type" href="http://www.lua.org/manual/5.1/manual.html#5.5">table</a></span>
+        headers: The HTTP headers of the response. If no request was sent, this will be nil.</li>
+        <li>
+          <span class="types"><span class="type">number</span></span>
+        time: The number of seconds between the function being called and the results being returned, calculated with os.time().</li>
+        <li>
+          <span class="types"><span class="type">number</span></span>
+        clock: The number of seconds of CPU time used between the function being called and the results being returned, calculated with os.clock().</li>
+    </ol>
 
 
 
@@ -225,20 +349,45 @@
 </dd>
     <dt>
     <a name = "wow:GetGuildPerks"></a>
-    <strong>wow:GetGuildPerks&nbsp;(locale, forceRefresh)</strong>
+    <strong>wow:GetGuildPerks&nbsp;( [locale [, forceRefresh]])</strong>
     </dt>
     <dd>
     Retrieve a list of guild perks.
- <br/> See :SendRequest for return values. See :SendRequest and :SendRequestRaw for more information on the locale and forceRefresh parameters.
 
     <h3>Parameters:</h3>
     <ul>
         <li><span class="parameter">locale</span>
-         (string, optional) The locale to retrieve the data in.</li>
+            <span class="types"><a class="type" href="http://www.lua.org/manual/5.1/manual.html#5.4">string</a></span>
+         The locale to retrieve the data in.</li>
         <li><span class="parameter">forceRefresh</span>
-         (boolean, optional) If true, send a request regardless of cached results.</li>
+            <span class="types"><span class="type">bool</span></span>
+         If true, send a request regardless of cached results.</li>
     </ul>
 
+    <h3>Returns:</h3>
+    <ol>
+        <li>
+          <span class="types"><span class="type">bool</span></span>
+        success: Did the query succeed?</li>
+        <li>
+          <span class="types"><span class="type">tab</span></span>
+        result: The decoded JSON data.</li>
+        <li>
+          <span class="types"><span class="type">number</span></span>
+        code: The HTTP response status code. If no request was sent, this will be 304.</li>
+        <li>
+          <span class="types"><a class="type" href="http://www.lua.org/manual/5.1/manual.html#5.4">string</a></span>
+        status: The full HTTP response status. If no request was sent, this will be "No request sent".</li>
+        <li>
+          <span class="types"><a class="type" href="http://www.lua.org/manual/5.1/manual.html#5.5">table</a></span>
+        headers: The HTTP headers of the response. If no request was sent, this will be nil.</li>
+        <li>
+          <span class="types"><span class="type">number</span></span>
+        time: The number of seconds between the function being called and the results being returned, calculated with os.time().</li>
+        <li>
+          <span class="types"><span class="type">number</span></span>
+        clock: The number of seconds of CPU time used between the function being called and the results being returned, calculated with os.clock().</li>
+    </ol>
 
 
 
@@ -246,20 +395,45 @@
 </dd>
     <dt>
     <a name = "wow:GetGuildAchievements"></a>
-    <strong>wow:GetGuildAchievements&nbsp;(locale, forceRefresh)</strong>
+    <strong>wow:GetGuildAchievements&nbsp;( [locale [, forceRefresh]])</strong>
     </dt>
     <dd>
     Retrieve a list of guild achievements.
- <br/> See :SendRequest for return values. See :SendRequest and :SendRequestRaw for more information on the locale and forceRefresh parameters.
 
     <h3>Parameters:</h3>
     <ul>
         <li><span class="parameter">locale</span>
-         (string, optional) The locale to retrieve the data in.</li>
+            <span class="types"><a class="type" href="http://www.lua.org/manual/5.1/manual.html#5.4">string</a></span>
+         The locale to retrieve the data in.</li>
         <li><span class="parameter">forceRefresh</span>
-         (boolean, optional) If true, send a request regardless of cached results.</li>
+            <span class="types"><span class="type">bool</span></span>
+         If true, send a request regardless of cached results.</li>
     </ul>
 
+    <h3>Returns:</h3>
+    <ol>
+        <li>
+          <span class="types"><span class="type">bool</span></span>
+        success: Did the query succeed?</li>
+        <li>
+          <span class="types"><span class="type">tab</span></span>
+        result: The decoded JSON data.</li>
+        <li>
+          <span class="types"><span class="type">number</span></span>
+        code: The HTTP response status code. If no request was sent, this will be 304.</li>
+        <li>
+          <span class="types"><a class="type" href="http://www.lua.org/manual/5.1/manual.html#5.4">string</a></span>
+        status: The full HTTP response status. If no request was sent, this will be "No request sent".</li>
+        <li>
+          <span class="types"><a class="type" href="http://www.lua.org/manual/5.1/manual.html#5.5">table</a></span>
+        headers: The HTTP headers of the response. If no request was sent, this will be nil.</li>
+        <li>
+          <span class="types"><span class="type">number</span></span>
+        time: The number of seconds between the function being called and the results being returned, calculated with os.time().</li>
+        <li>
+          <span class="types"><span class="type">number</span></span>
+        clock: The number of seconds of CPU time used between the function being called and the results being returned, calculated with os.clock().</li>
+    </ol>
 
 
 
@@ -267,20 +441,45 @@
 </dd>
     <dt>
     <a name = "wow:GetItemClasses"></a>
-    <strong>wow:GetItemClasses&nbsp;(locale, forceRefresh)</strong>
+    <strong>wow:GetItemClasses&nbsp;( [locale [, forceRefresh]])</strong>
     </dt>
     <dd>
     Retrieve a list of item classes.
- <br/> See :SendRequest for return values. See :SendRequest and :SendRequestRaw for more information on the locale and forceRefresh parameters.
 
     <h3>Parameters:</h3>
     <ul>
         <li><span class="parameter">locale</span>
-         (string, optional) The locale to retrieve the data in.</li>
+            <span class="types"><a class="type" href="http://www.lua.org/manual/5.1/manual.html#5.4">string</a></span>
+         The locale to retrieve the data in.</li>
         <li><span class="parameter">forceRefresh</span>
-         (boolean, optional) If true, send a request regardless of cached results.</li>
+            <span class="types"><span class="type">bool</span></span>
+         If true, send a request regardless of cached results.</li>
     </ul>
 
+    <h3>Returns:</h3>
+    <ol>
+        <li>
+          <span class="types"><span class="type">bool</span></span>
+        success: Did the query succeed?</li>
+        <li>
+          <span class="types"><span class="type">tab</span></span>
+        result: The decoded JSON data.</li>
+        <li>
+          <span class="types"><span class="type">number</span></span>
+        code: The HTTP response status code. If no request was sent, this will be 304.</li>
+        <li>
+          <span class="types"><a class="type" href="http://www.lua.org/manual/5.1/manual.html#5.4">string</a></span>
+        status: The full HTTP response status. If no request was sent, this will be "No request sent".</li>
+        <li>
+          <span class="types"><a class="type" href="http://www.lua.org/manual/5.1/manual.html#5.5">table</a></span>
+        headers: The HTTP headers of the response. If no request was sent, this will be nil.</li>
+        <li>
+          <span class="types"><span class="type">number</span></span>
+        time: The number of seconds between the function being called and the results being returned, calculated with os.time().</li>
+        <li>
+          <span class="types"><span class="type">number</span></span>
+        clock: The number of seconds of CPU time used between the function being called and the results being returned, calculated with os.clock().</li>
+    </ol>
 
 
 
@@ -288,20 +487,45 @@
 </dd>
     <dt>
     <a name = "wow:GetTalents"></a>
-    <strong>wow:GetTalents&nbsp;(locale, forceRefresh)</strong>
+    <strong>wow:GetTalents&nbsp;( [locale [, forceRefresh]])</strong>
     </dt>
     <dd>
     Retrieve a list of talents, specs and glyphs for each class.
- <br/> See :SendRequest for return values. See :SendRequest and :SendRequestRaw for more information on the locale and forceRefresh parameters.
 
     <h3>Parameters:</h3>
     <ul>
         <li><span class="parameter">locale</span>
-         (string, optional) The locale to retrieve the data in.</li>
+            <span class="types"><a class="type" href="http://www.lua.org/manual/5.1/manual.html#5.4">string</a></span>
+         The locale to retrieve the data in.</li>
         <li><span class="parameter">forceRefresh</span>
-         (boolean, optional) If true, send a request regardless of cached results.</li>
+            <span class="types"><span class="type">bool</span></span>
+         If true, send a request regardless of cached results.</li>
     </ul>
 
+    <h3>Returns:</h3>
+    <ol>
+        <li>
+          <span class="types"><span class="type">bool</span></span>
+        success: Did the query succeed?</li>
+        <li>
+          <span class="types"><span class="type">tab</span></span>
+        result: The decoded JSON data.</li>
+        <li>
+          <span class="types"><span class="type">number</span></span>
+        code: The HTTP response status code. If no request was sent, this will be 304.</li>
+        <li>
+          <span class="types"><a class="type" href="http://www.lua.org/manual/5.1/manual.html#5.4">string</a></span>
+        status: The full HTTP response status. If no request was sent, this will be "No request sent".</li>
+        <li>
+          <span class="types"><a class="type" href="http://www.lua.org/manual/5.1/manual.html#5.5">table</a></span>
+        headers: The HTTP headers of the response. If no request was sent, this will be nil.</li>
+        <li>
+          <span class="types"><span class="type">number</span></span>
+        time: The number of seconds between the function being called and the results being returned, calculated with os.time().</li>
+        <li>
+          <span class="types"><span class="type">number</span></span>
+        clock: The number of seconds of CPU time used between the function being called and the results being returned, calculated with os.clock().</li>
+    </ol>
 
 
 
@@ -309,20 +533,45 @@
 </dd>
     <dt>
     <a name = "wow:GetBattlePetTypes"></a>
-    <strong>wow:GetBattlePetTypes&nbsp;(locale, forceRefresh)</strong>
+    <strong>wow:GetBattlePetTypes&nbsp;( [locale [, forceRefresh]])</strong>
     </dt>
     <dd>
     Retrieve a list of battle pet types (including what they are strong and weak against).
- <br/> See :SendRequest for return values. See :SendRequest and :SendRequestRaw for more information on the locale and forceRefresh parameters.
 
     <h3>Parameters:</h3>
     <ul>
         <li><span class="parameter">locale</span>
-         (string, optional) The locale to retrieve the data in.</li>
+            <span class="types"><a class="type" href="http://www.lua.org/manual/5.1/manual.html#5.4">string</a></span>
+         The locale to retrieve the data in.</li>
         <li><span class="parameter">forceRefresh</span>
-         (boolean, optional) If true, send a request regardless of cached results.</li>
+            <span class="types"><span class="type">bool</span></span>
+         If true, send a request regardless of cached results.</li>
     </ul>
 
+    <h3>Returns:</h3>
+    <ol>
+        <li>
+          <span class="types"><span class="type">bool</span></span>
+        success: Did the query succeed?</li>
+        <li>
+          <span class="types"><span class="type">tab</span></span>
+        result: The decoded JSON data.</li>
+        <li>
+          <span class="types"><span class="type">number</span></span>
+        code: The HTTP response status code. If no request was sent, this will be 304.</li>
+        <li>
+          <span class="types"><a class="type" href="http://www.lua.org/manual/5.1/manual.html#5.4">string</a></span>
+        status: The full HTTP response status. If no request was sent, this will be "No request sent".</li>
+        <li>
+          <span class="types"><a class="type" href="http://www.lua.org/manual/5.1/manual.html#5.5">table</a></span>
+        headers: The HTTP headers of the response. If no request was sent, this will be nil.</li>
+        <li>
+          <span class="types"><span class="type">number</span></span>
+        time: The number of seconds between the function being called and the results being returned, calculated with os.time().</li>
+        <li>
+          <span class="types"><span class="type">number</span></span>
+        clock: The number of seconds of CPU time used between the function being called and the results being returned, calculated with os.clock().</li>
+    </ol>
 
 
 

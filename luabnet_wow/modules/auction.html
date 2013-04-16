@@ -73,7 +73,7 @@
 <h2><a href="#Functions">Functions</a></h2>
 <table class="function_list">
 	<tr>
-	<td class="name" nowrap><a href="#wow:GetAuctionData">wow:GetAuctionData&nbsp;(realm, forceRefresh)</a></td>
+	<td class="name" nowrap><a href="#wow:GetAuctionData">wow:GetAuctionData&nbsp;(realm [, forceRefresh])</a></td>
 	<td class="summary">Retrieve an auction data dump.</td>
 	</tr>
 </table>
@@ -86,21 +86,49 @@
     <dl class="function">
     <dt>
     <a name = "wow:GetAuctionData"></a>
-    <strong>wow:GetAuctionData&nbsp;(realm, forceRefresh)</strong>
+    <strong>wow:GetAuctionData&nbsp;(realm [, forceRefresh])</strong>
     </dt>
     <dd>
     Retrieve an auction data dump.
  Due to the extremely large size of these dumps, this request will often take a long time to process. Using a faster decompression library will speed this up slightly.
- <br/> See :SendRequest for return values. See :SendRequest and :SendRequestRaw for more information on the forceRefresh parameter.
 
     <h3>Parameters:</h3>
     <ul>
         <li><span class="parameter">realm</span>
-         (string) The realm to get auction data for.</li>
+            <span class="types"><a class="type" href="http://www.lua.org/manual/5.1/manual.html#5.4">string</a></span>
+         The realm to get auction data for.</li>
         <li><span class="parameter">forceRefresh</span>
-         (boolean, optional) If true, send a request regardless of cached results.</li>
+            <span class="types"><span class="type">bool</span></span>
+         If true, send a request regardless of cached results.</li>
     </ul>
 
+    <h3>Returns:</h3>
+    <ol>
+        <li>
+          <span class="types"><span class="type">bool</span></span>
+        success: Did the query succeed?</li>
+        <li>
+          <span class="types"><span class="type">tab</span></span>
+        result: The decoded JSON data.</li>
+        <li>
+          <span class="types"><span class="type">number</span></span>
+        code: The HTTP response status code. If no request was sent, this will be 304.</li>
+        <li>
+          <span class="types"><a class="type" href="http://www.lua.org/manual/5.1/manual.html#5.4">string</a></span>
+        status: The full HTTP response status. If no request was sent, this will be "No request sent".</li>
+        <li>
+          <span class="types"><a class="type" href="http://www.lua.org/manual/5.1/manual.html#5.5">table</a></span>
+        headers: The HTTP headers of the response. If no request was sent, this will be nil.</li>
+        <li>
+          <span class="types"><span class="type">number</span></span>
+        time: The number of seconds between the function being called and the results being returned, calculated with os.time().</li>
+        <li>
+          <span class="types"><span class="type">number</span></span>
+        clock: The number of seconds of CPU time used between the function being called and the results being returned, calculated with os.clock().</li>
+        <li>
+          <span class="types"><a class="type" href="http://www.lua.org/manual/5.1/manual.html#5.4">string</a></span>
+        aucRequestType: Which request the status and headers refer to. If the URL request returned a 200 (HTTP OK) status code, this will be "data" (because a request was sent for the data). If the URL request returned a 304 (HTTP Not Modified or no request sent) or any other status code, this will be "url" (because no request was sent for the data).</li>
+    </ol>
 
 
 

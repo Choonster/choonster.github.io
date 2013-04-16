@@ -90,14 +90,39 @@
     </dt>
     <dd>
     Retrieve realm status data.
- <br/> See :SendRequest for return values.
+ These results are never cached.
 
     <h3>Parameters:</h3>
     <ul>
         <li><span class="parameter">realms</span>
-         (string, optional) A comma separated list of realms to query. If nil or omitted, all realms will be queried.</li>
+            <span class="types"><a class="type" href="http://www.lua.org/manual/5.1/manual.html#5.4">string</a></span>
+         A comma separated list of realms to query. If nil or omitted, all realms will be queried.</li>
     </ul>
 
+    <h3>Returns:</h3>
+    <ol>
+        <li>
+          <span class="types"><span class="type">bool</span></span>
+        success: Did the query succeed?</li>
+        <li>
+          <span class="types"><span class="type">tab</span></span>
+        result: The decoded JSON data.</li>
+        <li>
+          <span class="types"><span class="type">number</span></span>
+        code: The HTTP response status code. If no request was sent, this will be 304.</li>
+        <li>
+          <span class="types"><a class="type" href="http://www.lua.org/manual/5.1/manual.html#5.4">string</a></span>
+        status: The full HTTP response status. If no request was sent, this will be "No request sent".</li>
+        <li>
+          <span class="types"><a class="type" href="http://www.lua.org/manual/5.1/manual.html#5.5">table</a></span>
+        headers: The HTTP headers of the response. If no request was sent, this will be nil.</li>
+        <li>
+          <span class="types"><span class="type">number</span></span>
+        time: The number of seconds between the function being called and the results being returned, calculated with os.time().</li>
+        <li>
+          <span class="types"><span class="type">number</span></span>
+        clock: The number of seconds of CPU time used between the function being called and the results being returned, calculated with os.clock().</li>
+    </ol>
 
 
 
