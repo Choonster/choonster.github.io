@@ -9,10 +9,10 @@ $(document).ready(function(){
 		// "success": displayCharacterData
 	// })
 	
-	$.getJSON("http://us.battle.net/api/wow/character/aerie-peak/Eldershield", { fields: "items", jsonp: "foo" }, function(characterData){
+	$.getJSON("http://us.battle.net/api/wow/character/aerie-peak/Eldershield?jsonp=?", { fields: "items" }, function(characterData){
 		var text = data.name + " is a level " + data.level + " " + (data.gender ? "female" : "male") + " " + races[data.race - 1] +
 			" " + classes[data.class - 1] + " on the realm " + data.realm + "."
 			
-		$("#content").text(text)		
+		$("#content").text(text)
 	})
 })
