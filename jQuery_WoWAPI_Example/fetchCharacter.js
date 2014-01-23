@@ -33,7 +33,7 @@ var classes = [
 
 $(document).ready(function(){
 
-	var characterURL = "http://us.battle.net/api/wow/character/aerie-peak/Eldershield?jsonp=?"
+	var characterURL = "http://us.battle.net/api/wow/character/frostmourne/Choonster?jsonp=?"
 	
 	$.getJSON(characterURL, function(data){
 		var text = data.name + " is a level " + data.level + " " + (data.gender ? "female" : "male") + " " + races[data.race - 1] +
